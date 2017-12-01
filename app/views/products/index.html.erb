@@ -1,0 +1,81 @@
+<style>
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    font-size: 16px;
+}
+input[type=text] {
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    height:42px;
+}
+
+/*input[type=text]:focus {
+    width: 20%;
+}*/
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+.search-bar{
+  float: right;
+    margin-bottom: 25px;
+}
+</style>
+<div ng-controller="productsController">
+  <div class="search-bar">
+    <input type="text" id="fname" name="category_name" ng-model="category_name" placeholder="Enter category name">
+    <input type="text" ng-model="subcategory_name" placeholder="Enter sub-category name">
+    
+            <button class="button" style="margin-top: 21px;" ng-click="search(category_name,subcategory_name)">Filter</button>
+          
+  </div>
+  <div>
+    <table id="customers">
+      <thead>
+        <tr>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        
+      </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="product in products">
+          <td>{{product.name}}</td>
+          <td>{{product.description}}</td>
+          <td>{{product.price}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<script type="text/javascript">
+  var json = {
+    products: <%= @products.to_json.html_safe %>
+  }
+</script>
